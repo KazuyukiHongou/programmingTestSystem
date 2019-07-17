@@ -1,0 +1,16 @@
+[Unit]
+Description=Programming Test System Meteor Application
+
+[Service]
+Type=simple
+Restart=always
+ExecStart=/var/laboratory/programmingTestSystem/meteor/PTSMeteor.sh
+RestartSec=3s
+User=root
+
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=PTSMeteorApp
+
+[Install]
+WantedBy=default.target

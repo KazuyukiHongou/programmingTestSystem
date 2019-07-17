@@ -1,0 +1,13 @@
+<template name="adminAccounts">
+  <div class="row-fluid">
+  {{#if currentUser}}
+    <div class="col-md-10 col-md-offset-1">
+      {{> accountsSearchComponent}}
+      {{> accountsControlComponent}}
+      {{> accountsListComponent}}
+    </div>
+  {{else}}
+      Loginしてください
+  {{/if}}
+  </div>
+</template>

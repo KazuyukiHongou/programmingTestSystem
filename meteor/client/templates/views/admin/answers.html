@@ -1,0 +1,13 @@
+<template name="adminAnswers">
+  <div class="row-fluid">
+  {{#if currentUser}}
+    <h3 class="col-md-8 col-md-offset-2">{{userName}}&nbsp;さんの解答</h3>
+    <div class="col-md-8 col-md-offset-2">
+      {{> programTestIssue1Component}}
+      {{> programTestIssue2Component}}
+    </div>
+  {{else}}
+      Loginしてください
+  {{/if}}
+  </div>
+</template>

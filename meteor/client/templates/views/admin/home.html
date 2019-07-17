@@ -1,0 +1,11 @@
+<template name="adminHome">
+  <ul>
+    {{#if currentUser}}
+      <li><a href="{{pathFor route='adminHome'}}">Home</a></li>
+      <li><a href="{{pathFor route='adminAccounts'}}">受験者一覧</a></li>
+      <li><a href="#" class="logout">Logout</a></li>
+    {{else}}
+      <li><a href="{{pathFor route='adminLogin'}}">Login</a></li>
+    {{/if}}
+  </ul>
+</template>

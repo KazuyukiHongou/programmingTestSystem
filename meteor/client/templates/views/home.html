@@ -1,0 +1,102 @@
+<template name="home">
+  {{#if currentUser}}
+  <h3>ようこそ&nbsp;{{userName}}&nbsp;さん</h3>
+  <div class="container-fluid">
+  {{#if ended}}
+    <div class="row">
+      <div class="col-xs-12">既に制限時間を過ぎています。画面を閉じるか、右上のLogoutボタンからLogoutしてください</div>
+    </div>
+  {{else}}
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-xs-12">制限時間内に出題された問題の解答コードを提出してください。</div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12"><strong class="d-inline-block mb-2 text-primary">制限時間は60分です。</strong></div>
+      </div>
+      <div class="well">
+        <dl class="txt1">
+          <dt class="icon4">概要</dt>
+          <dd>
+            <p>①このテストでは、基本的なプログラミングスキルを測り、以下のような項目について評価します。</p>
+            <ul>
+              <li>if文やfor文等の基本構文が正しく使用できているか</li>
+              <li>あまりに冗長なアルゴリズムになっていないか</li>
+            </ul>
+          </dd>
+          <dd>
+            <p>②問題中に必要な各言語毎に用意された関数・メソッドそのもの知識については評価外とします。分からない場合は日本語の関数・メソッドを記載して構いません。</p>
+            <ul>
+              <li>例：文字列型の数字が格納された変数number_strを数値型に変換したいが、型変換の関数・メソッド名を忘れた場合</li>
+              <code>number = 数値型に変換する関数(number_str);</code>
+              <li>禁止例：各言語毎に用意されていない関数・メソッド</li>
+              <code>Xページ目の検索結果を表示する関数(2);</code>
+            </ul>
+          </dd>
+          <dd>
+            <p>③使用するプログラム言語は自由です。テスト画面内に使用言語を記載する欄があるので、そちらへご記載ください。</p>
+            <p>④デザインではなく処理に重点を置くようにお願いいたします。</p>
+          </dd>
+        </dl>
+      </div>
+      <div class="well">
+        <dl class="txt1">
+          <dt class="icon4">注意事項</dt>
+            <dd>
+              <li style="color:blue"><b>問題は2問あります。画面をスクロールしてご確認ください</b></li>
+              <li style="color:red"><b>インターネット等の外部情報を参照しないでください</b></li>
+              <li style="color:red"><b>回答やヒントを教えてもらったり他人のコードを利用しないでください</b></li>
+              <li style="color:red"><b>問題及び提出コード、ヒントをブログやSNS等に掲載しないでください</b></li>
+              <li style="color:red"><b>面談時にコード内容について質問させていただく可能性があります</b></li>
+            </dd>
+        </dl>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-xs-12">準備ができたら以下のボタンをクリックし、プログラムテストを受験してください。カウントダウンが開始されます。</div>
+    </div>
+    <div class="row">
+      <br/><div class="col-xs-12"><button type="button" class="btn btn-primary btn-lg start">プログラムテストへ</button></div>
+    </div>
+    {{/if}}
+  </div>
+{{/if}}
+  <hr>
+  <blockquote>
+    <footer>
+    {{#if currentUser}}
+      <a href="#" class="logout">Logout</a>
+    {{else}}
+      <a href="{{pathFor route='login'}}">Login</a>
+    {{/if}}
+    </footer>
+  </blockquote>
+  {{> programTestStartConfirmModalTemplate}}
+</template>
+
+<template name="programTestStartConfirmModalTemplate">
+  <div class="modal fade" id="programTestStartConfirmModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header alert-danger">
+          <h4 class="modal-title">確認</h4>
+        </div>
+        <div class="modal-body">
+          <h4>テストを開始する前に以下の注意事項をご確認ください</h4>
+          <ul>
+            <li style="color:blue"><b>問題は2問あります。画面をスクロールしてご確認ください</b></li>
+            <li style="color:red"><b>インターネット等の外部情報を参照しないでください</b></li>
+            <li style="color:red"><b>回答やヒントを教えてもらったり他人のコードを利用しないでください</b></li>
+            <li style="color:red"><b>問題及び提出コード、ヒントをブログやSNS等に掲載しないでください</b></li>
+            <li style="color:red"><b>面談時にコード内容について質問させていただく可能性があります</b></li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
+          <button type="button" class="btn btn-primary confirm" id="execute">同意して開始</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

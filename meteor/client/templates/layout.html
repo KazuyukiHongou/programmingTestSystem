@@ -1,0 +1,51 @@
+<template name="layout">
+<body style="padding-top:70px;">
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        {{#if isAdmin}}
+          {{#if currentUser}}
+        <a class="navbar-brand" href="{{pathFor 'adminHome'}}">Programming Test System Admin</a>
+          {{else}}
+        <a class="navbar-brand" href="{{pathFor 'adminLogin'}}">Programming Test System Admin</a>
+          {{/if}}
+        {{else}}
+          {{#if currentUser}}
+        <a class="navbar-brand" href="{{pathFor 'home'}}">Programming Test System</a>
+          {{else}}
+        <a class="navbar-brand" href="{{pathFor 'login'}}">Programming Test System</a>
+          {{/if}}
+        {{/if}}
+      </div>
+      <ul class="nav navbar-nav">
+        {{#if isAdmin}}
+          {{#if currentUser}}
+        <li class="{{activeIfCurrent 'adminHome'}}"><a href="{{pathFor route='adminHome'}}">Home</a></li>
+        <li class="{{activeIfCurrent 'adminAccounts'}}"><a href="{{pathFor route='adminAccounts'}}">受験者一覧</a></li>
+        <li class="{{activeIfCurrent 'adminLogout'}}"><a href="#" class="logout">Logout</a></li>
+          {{else}}
+        <li class="{{activeIfCurrent 'adminLogin'}}"><a href="{{pathFor route='adminLogin'}}">Admin Login</a></li>
+            {{#if useAdminRegister}}
+        <li class="{{activeIfCurrent 'adminRegister'}}"><a href="{{pathFor route='adminRegister'}}">Admin Regist</a></li>
+            {{/if}}
+          {{/if}}
+        {{else}}
+          {{#if currentUser}}
+        <li class="{{activeIfCurrent 'home'}}"><a href="{{pathFor route='home'}}">Home</a></li>
+        <li class="{{activeIfCurrent 'logout'}}"><a href="#" class="logout">Logout</a></li>
+          {{else}}
+        <li class="{{activeIfCurrent 'login'}}"><a href="{{pathFor route='login'}}">Login</a></li>
+            {{#if useUserRegister}}
+        <li class="{{activeIfCurrent 'register'}}"><a href="{{pathFor route='register'}}">Regist</a></li>
+            {{/if}}
+          {{/if}}
+        {{/if}}
+        <li class=""><a href="#">{{remainingTime}}</a></li>
+      </ul>
+    </div>
+  </nav>
+  <main class="container-fluid">
+    {{> yield}}
+  </main>
+</body>
+</template>

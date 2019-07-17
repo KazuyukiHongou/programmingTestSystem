@@ -1,0 +1,43 @@
+<template name="accountsListComponent">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h4>受験者リスト</h4>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>名前</th>
+          <th>メールアドレス</th>
+          <th>パスワード</th>
+          <th>メモ</th>
+          <th>テスト開始時間</th>
+          <th>テスト終了時間</th>
+          <th>問題1</th>
+          <th>問題2</th>
+          <th>解答</th>
+          <th>編集</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each accounts}}
+          {{> accountsListItem}}
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</template>
+
+<template name="accountsListItem">
+  <tr>
+    <td>{{username}}</td>
+    <td>{{emailaddress}}</td>
+    <td>{{password}}</td>
+    <td>{{memo}}</td>
+    <td>{{testStartedDt}}</td>
+    <td>{{testEndedDt}}</td>
+    <td>{{answer1Points}}</td>
+    <td>{{answer2Points}}</td>
+    <td><div class="col-xs-2"><button type="button" class="btn btn-primary btn-sm answer" value="{{emailaddress}}">解答へ</button></div></td>
+    <td><div class="col-xs-2"><button type="button" class="btn btn-primary btn-sm edit" value="{{emailaddress}}">編集</button></div></td>
+  </tr>
+</template>

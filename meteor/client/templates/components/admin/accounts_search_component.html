@@ -1,0 +1,23 @@
+<template name="accountsSearchComponent">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h4>絞り込み</h4>
+    </div>
+    <div class="panel-body">
+      <form class="form-horizontal">
+        <div class="form-group well">
+        {{> accountsSearchInputTemplate inputId="username" labelStr="名前:" placeholderStr="本郷 和幸... 改行区切りで複数指定できます"}}
+        {{> accountsSearchInputTemplate inputId="mail" labelStr="メールアドレス:" placeholderStr="k.hongou@i-call.co.jp... 改行区切りで複数指定できます"}}
+        </div>
+        <input type="submit" value="submit" class="btn btn-primary col-md-offset-6"/>
+      </form>
+    </div>
+  </div>
+</template>
+
+<template name="accountsSearchInputTemplate">
+    <label class="control-label col-md-2" for="{{inputId}}">{{labelStr}}</label>
+    <div class="controls col-md-4">
+      <textarea name="{{inputId}}" id="{{iputId}}" value="" placeholder="{{placeholderStr}}" class="form-control" rows="4" cols="20"></textarea>
+    </div>
+</template>

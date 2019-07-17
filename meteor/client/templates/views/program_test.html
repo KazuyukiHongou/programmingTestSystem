@@ -1,0 +1,67 @@
+<template name="programTest">
+  <div class="row-fluid">
+  {{#if currentUser}}
+    <div class="col-md-8 col-md-offset-2">
+      <div class="row">
+        {{#if ended}}
+        <h3>
+          <div class="col-xs-12"><strong class="d-inline-block mb-2 text-danger">テストの制限時間を過ぎました。<br/>
+            制限時間を過ぎた直前のコードは自動的にサーバは送信済みとなっています。</strong><br/>
+            ※Logoutしてください。
+          </div>
+        </h3>
+        {{else}}
+        <h3>
+          <div class="col-xs-12">残り時間：<strong class="d-inline-block mb-2 text-primary">{{remainingTime}}</strong><br/></div>
+        </h3>
+        <h4>
+          <div class="col-xs-12">※制限時間前にテストを完了した場合は、その時点でLogoutしてください。</div>
+        </h4>
+        <h4>
+          <div class="col-xs-12">※テストの概要、注意事項を再確認したい場合は上部ヘッダの「Home」からホーム画面へ戻ってください。</div>
+        </h4>
+        {{/if}}
+      </div>
+      {{> programTestIssue1Component}}
+      {{> programTestIssue2Component}}
+    </div>
+  {{else}}
+      Loginしてください
+  {{/if}}
+  </div>
+  {{> programTestFinishModalTemplate}}
+</template>
+
+<template name="programTestFinishModalTemplate">
+  <div class="modal fade" id="programTestFinishModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header alert-danger">
+          <h4 class="modal-title">確認</h4>
+        </div>
+        {{#if ended}}
+        <div class="modal-body">
+          <h4>プログラムテストお疲れ様でした。<br>制限時間を過ぎているため、解答の送信はできません</h4>
+          <ul>
+            <li style="color:red"><b>未だ一度も解答を送信していない問題については、制限時間を過ぎた直前のコードを自動的にサーバへ送信済みとなっています</b></li>
+            <li style="color:red"><b>Logoutします</b></li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default logout" data-dismiss="modal">閉じる</button>
+        </div>
+        {{else}}
+        <div class="modal-body">
+          <h4>プログラムテストお疲れ様でした。<br>制限時間以内のため、解答の再送信は可能です</h4>
+          <ul>
+            <li style="color:red"><b>テスト終了で宜しければ画面を閉じるか、右上のLogoutボタンからLogoutしてください</b></li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default logout" data-dismiss="modal">閉じる</button>
+        </div>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</template>

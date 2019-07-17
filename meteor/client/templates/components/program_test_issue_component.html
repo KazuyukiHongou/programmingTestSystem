@@ -1,0 +1,379 @@
+<template name="programTestIssue1Component">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h4>問題１：ブラックジャック{{#if isSended}}　※解答送信済み{{/if}}{{#if isEdited}}(未送信の編集中コードがあります){{/if}}
+      </h4>
+    </div>
+    <div class="panel-body">
+      <p class="mb15">
+      </p><p>整数を足して 21 を目指すゲームをプレイするプログラムを作成します。</p>
+
+      <p>そのゲームでは、はじめに 2 つの数字を受け取り、更に数字を受け取るかどうかの判断をします。<br>
+      受け取る場合は "ヒット" 、受け取らない場合は "ステイ" と出力するルールになっています。</p>
+
+      <p>以下のルールで "ヒット" もしくは "ステイ" を出力するプログラムを作成してください。</p>
+
+      <p>・2つの数字の合計が 16 未満であれば "ヒット"<br>
+      ・2つの数字の合計が 16 以上であれば "ステイ"</p>
+      <p></p>
+      <div class="col-md-11"></div>
+      <div class="col-md-1">
+        <button type="button" class="btn btn-info toggle">隠す</button>
+      </div>
+      <div class="well">
+        <dl class="txt1">
+          <dt class="icon2">入力される値</dt>
+          <dd>
+            <p>入力は以下のフォーマットで与えられます。</p>
+            <pre><code>X Y</code></pre>
+            <p>・XとYははじめに受け取る 2 つの数字でスペースが間に入っています</p>
+            <p>・入力は 1 行となり末尾に改行が入ります。</p>
+            <p>・それぞれの値は文字列で標準入力から渡されて変数stdinputに保持されていることとします。</p>
+          </dd>
+        </dl>
+      </div>
+
+      <div class="well">
+        <dl class="txt1">
+          <dt class="icon3">期待する出力</dt>
+          <dd>
+            <p>X と Y の 2 つの数字から以下の条件で "ヒット" か "ステイ" を出力してください。<br>
+            <br>
+            ・2つの数字の合計が 16 未満であれば "ヒット"<br>
+            ・2つの数字の合計が 16 以上であれば "ステイ"<br>
+            </p>
+          </dd>
+        </dl>
+      </div>
+
+      <div class="well">
+        <dl class="txt1">
+          <dt class="icon4">条件</dt>
+          <dd>
+              <p>受け取る2つの数字は以下の条件を満たします。</p>
+          <ul>
+          <li>1 ≦ X, X ≦ 13, 1 ≦ Y, Y ≦ 13 </li>
+          </ul>
+          </dd>
+          <dd>
+              <p>以下特殊な扱いをする数字があります。</p>
+          <ul>
+          <li>10～13 は全て 10 として扱う </li>
+          <li>1 は 11として扱う (正式なルールでは1(エース)は1と11のどちらか都合のよい方で数えることができますが、本テストでは便宜上 11として扱います) </li>
+          </ul>
+          </dd>
+        </dl>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading well">サンプル</div>
+        <div class="well">
+          <dl class="txt1">
+            <dt class="icon4">入力１</dt>
+            <dd>
+                <p>2 8</p>
+            </dd>
+            <dt class="icon4">出力１</dt>
+            <dd>
+                <p>ヒット</p>
+            </dd>
+          </dl>
+        </div>
+        <div class="well">
+          <dl class="txt1">
+            <dt class="icon4">入力２</dt>
+            <dd>
+                <p>10 11</p>
+            </dd>
+            <dt class="icon4">出力２</dt>
+            <dd>
+                <p>ステイ</p>
+            </dd>
+          </dl>
+        </div>
+        <div class="well">
+          <dl class="txt1">
+            <dt class="icon4">入力３</dt>
+            <dd>
+                <p>6 1</p>
+            </dd>
+            <dt class="icon4">出力３</dt>
+            <dd>
+                <p>ステイ</p>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <form class="form-horizontal">
+        <div class="form-group">
+          <label class="control-label col-md-2" for="answerLanguage">使用言語</label>
+          <div class="controls col-md-4">
+            <input name="answerLanguage" id="answerLanguage" type="text" value="{{answerLanguage}}" placeholder="使用する言語を記載してください" class="form-control" {{isAdminViewReadonly}}/>
+            ※他の解答も同様の言語を使用する前提となります
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-md-2" for="answer1Code">解答</label>
+          <div class="controls col-md-10">
+            <textarea name="answer1Code" id="answer1Code" value="" placeholder="変数stdinputに標準入力から渡された値が保持されているとします。
+ex C言語)
+char stdinput[5];
+fgets(stdinput, sizeof(stdinput), stdin);
+
+ex PHP)
+$stdinput = fgets(STDIN);
+
+ex JavaScript)
+stdinput = '2 8';
+" class="form-control" rows="15" cols="20" {{isAdminViewReadonly}}>{{answerCode}}</textarea>
+          </div>
+          <label class="control-label col-md-2" for="answer1TempCode" style="{{isTempCodeDisplay}}">解答(未送信分)</label>
+          <div class="controls col-md-10" style="{{isTempCodeDisplay}}">
+            <textarea name="answer1TempCode" id="answer1TempCode" value="" placeholder="変数stdinputに標準入力から渡された値が保持されているとします。" class="form-control" rows="15" cols="20" {{isAdminViewReadonly}}>{{answerTempCode}}</textarea>
+          </div>
+        </div>
+        {{#if isAdmin}}{{else}}
+        <input type="submit" value="送信" class="btn btn-primary col-md-offset-6 answer1" {{isAdminViewReadonly}}/>
+        ※制限時間内であれば解答は何度でも送信できます
+        {{/if}}
+        {{#if isEdited}}
+        <div class="col-md-offset-6"><strong class="d-inline-block mb-2 text-danger">未送信の編集中コードがあります</strong></div>
+          {{#if isSended}}{{#if isAdmin}}{{else}}
+          <div class="col-md-offset-6">
+            <button type="button" class="btn btn-default btn-sm reloadSended">送信済みコードに戻す</button>
+          </div>
+          {{/if}}{{/if}}
+        {{/if}}
+      </form>
+      {{#if isAdmin}}
+      <hr>
+      <form class="form-horizontal">
+        <div class="form-group">
+          <label class="control-label col-md-2" for="answer1Points">採点結果</label>
+          <div class="controls col-md-4">
+            <input name="answer1Points" id="answer1Points" type="text" value="{{answerPoints}}" placeholder="" class="form-control" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-md-2" for="answer1Comment">コメント</label>
+          <div class="controls col-md-10">
+            <textarea name="answer1Comment" id="answer1Comment" value="" placeholder="" class="form-control" rows="5" cols="20">{{answerComment}}</textarea>
+          </div>
+        </div>
+        <div class="col-xs-4 col-md-offset-6">
+          <button type="button" class="btn btn-primary btn-sm comment" value="{{viewTargetEmail}}">保存</button>
+        </div>
+      </form>
+      {{/if}}
+    </div>
+  </div>
+  {{> programTestSendConfirmModalTemplate}}
+</template>
+
+<template name="programTestIssue2Component">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h4>問題２：ページネーション{{#if isSended}}　※解答送信済み{{/if}}{{#if isEdited}}(未送信の編集中コードがあります){{/if}}</h4>
+    </div>
+    <div class="panel-body">
+      <p class="mb15"></p>
+      <p>
+        検索サイトのページネーションという機能を作成します。
+        ページネーションとは、大量に得られた検索結果を「ページサイズ」と呼ばれるサイズ毎に区切ることで、検索結果を複数のページに分割して表示する機能です。
+        <br>
+        検索サイトでは便宜上、検索結果の件数を n 件としたとき、各検索結果は表示順に 1 から n まで番号付けられているとします。
+      </p>
+
+      <p>
+        例えば、検索結果が 26 件であり、ページサイズが 1ページあたり 10 件とすると<br/>
+        これらの検索結果はページ 1 からページ 3 までの 3 枚のページに分割され、各ページに表示される検索結果の番号は以下のようになります。
+      </p>
+
+      <p>
+        ・ページ 1: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10<br/>
+        ・ページ 2: 11, 12, 13, 14, 15, 16, 17, 18, 19, 20<br/>
+        ・ページ 3: 21, 22, 23, 24, 25, 26<br/>
+      </p>
+
+      <p>
+        検索結果の件数 n、ページサイズ s および表示したいページ番号 p が入力されるので、ページ p に表示される検索結果の番号を昇順に全て出力するプログラムを作成してください。<br/>
+        ただし、ページ p に表示される検索結果が 1 つも存在しない場合は "no data" と出力してください。
+      </p>
+      <div class="col-md-11"></div>
+      <div class="col-md-1">
+        <button type="button" class="btn btn-info toggle">隠す</button>
+      </div>
+
+      <div class="well">
+        <dl class="txt1">
+          <dt class="icon2">入力される値</dt>
+          <dd>
+            <p>入力は以下のフォーマットで与えられます。</p>
+            <pre><code>n s p</code></pre>
+            <p>・それぞれ以下３つの整数が半角スペース区切りで入力されます</p>
+            <ul>
+              <li>n：検索結果の件数を表す整数</li>
+              <li>s：ページサイズを表す整数</li>
+              <li>p：表示したいページ番号を表す整数</li>
+            </ul>
+            <p>・入力は 1 行となり末尾に改行が入ります。</p>
+            <p>・それぞれの値は文字列で標準入力から渡されて変数stdinputに保持されていることとします。</p>
+          </dd>
+        </dl>
+      </div>
+
+      <div class="well">
+        <dl class="txt1">
+          <dt class="icon3">期待する出力</dt>
+          <dd>
+              <p>・ページ p に表示される検索結果の番号を、昇順に全て半角スペース区切りで出力してください。<br>
+                 ・検索結果が 1 つも存在しない場合は "no data" と出力してください<br>
+              </p>
+          </dd>
+        </dl>
+      </div>
+
+      <div class="well">
+        <dl class="txt1">
+          <dt class="icon4">条件</dt>
+          <dd>
+              <p>受け取る3つの数字は以下の条件を満たします。</p>
+          <ul>
+          <li>0 ≦ n ≦ 10,000</li>
+          <li>1 ≦ s ≦ 10,000</li>
+          <li>1 ≦ p ≦ 10,000</li>
+          </ul>
+          </dd>
+        </dl>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading well">サンプル</div>
+        <div class="well">
+          <dl class="txt1">
+            <dt class="icon4">入力１</dt>
+            <dd>
+                <p>26 10 2</p>
+            </dd>
+            <dt class="icon4">出力１</dt>
+            <dd>
+                <p>11 12 13 14 15 16 17 18 19 20</p>
+            </dd>
+          </dl>
+        </div>
+        <div class="well">
+          <dl class="txt1">
+            <dt class="icon4">入力２</dt>
+            <dd>
+              <p>26 10 3</p>
+            </dd>
+            <dt class="icon4">出力２</dt>
+            <dd>
+              <p>21 22 23 24 25 26</p>
+            </dd>
+          </dl>
+        </div>
+        <div class="well">
+          <dl class="txt1">
+            <dt class="icon4">入力３</dt>
+            <dd>
+              <p>10 10 2</p>
+            </dd>
+            <dt class="icon4">出力３</dt>
+            <dd>
+              <p>no data</p>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <form class="form-horizontal">
+        <div class="form-group">
+          <label class="control-label col-md-2" for="answer2Code">解答</label>
+          <div class="controls col-md-10">
+            <textarea name="answer2Code" id="answer2Code" value="" placeholder="変数stdinputに標準入力から渡された値が保持されているとします。
+ex C言語)
+char stdinput[17];
+fgets(stdinput, sizeof(stdinput), stdin);
+
+ex PHP)
+$stdinput = fgets(STDIN);
+
+ex JavaScript)
+stdinput = '26 10 3';
+" class="form-control" rows="15" cols="20" {{isAdminViewReadonly}}>{{answerCode}}</textarea>
+          </div>
+          <label class="control-label col-md-2" for="answer2TempCode" style="{{isTempCodeDisplay}}">解答(未送信分)</label>
+          <div class="controls col-md-10" style="{{isTempCodeDisplay}}">
+            <textarea name="answer2TempCode" id="answer2TempCode" value="" placeholder="変数stdinputに標準入力から渡された値が保持されているとします。" class="form-control" rows="15" cols="20" {{isAdminViewReadonly}}>{{answerTempCode}}</textarea>
+          </div>
+        </div>
+        {{#if isAdmin}}{{else}}
+        <input type="submit" value="送信" class="btn btn-primary col-md-offset-6 answer2" {{isAdminViewReadonly}}/>
+        ※制限時間内であれば解答は何度でも送信できます
+        {{/if}}
+        {{#if isEdited}}
+        <div class="col-md-offset-6"><strong class="d-inline-block mb-2 text-danger">未送信の編集中コードがあります</strong></div>
+          {{#if isSended}}{{#if isAdmin}}{{else}}
+          <div class="col-md-offset-6">
+            <button type="button" class="btn btn-default btn-sm reloadSended">送信済みコードに戻す</button>
+          </div>
+          {{/if}}{{/if}}
+        {{/if}}
+      </form>
+      {{#if isAdmin}}
+      <hr>
+      <form class="form-horizontal">
+        <div class="form-group">
+          <label class="control-label col-md-2" for="answer2Points">採点結果</label>
+          <div class="controls col-md-4">
+            <input name="answer2Points" id="answer2Points" type="text" value="{{answerPoints}}" placeholder="" class="form-control" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-md-2" for="answer2Comment">コメント</label>
+          <div class="controls col-md-10">
+            <textarea name="answer2Comment" id="answer2Comment" value="" placeholder="" class="form-control" rows="5" cols="20">{{answerComment}}</textarea>
+          </div>
+        </div>
+        <div class="col-xs-4 col-md-offset-6">
+          <button type="button" class="btn btn-primary btn-sm comment" value="{{viewTargetEmail}}">保存</button>
+        </div>
+      </form>
+      {{/if}}
+    </div>
+  </div>
+  {{> programTestSendConfirmModalTemplate}}
+</template>
+
+<template name="programTestSendConfirmModalTemplate">
+  <div class="modal fade" id="programTestSendConfirmModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header alert-danger">
+          <h4 class="modal-title">確認</h4>
+        </div>
+        {{#if ended}}
+        <div class="modal-body">
+          <h4>
+            制限時間を過ぎているため、【問題{{issueNumber}}：{{issueTitle}}】の解答を送信できません<br>
+            使用言語のみ送信可能ですが、送信しますか？
+          </h4>
+          <ul>
+            <li style="color:red"><b>制限時間を過ぎた直前のコードは自動的にサーバは送信済みとなっています</b></li>
+          </ul>
+        </div>
+        {{else}}
+        <div class="modal-body">
+          <h4>【問題{{issueNumber}}：{{issueTitle}}】の解答を送信します。よろしいですか？</h4>
+          <ul>
+            <li style="color:red"><b>制限時間内であれば解答を再送信できます</b></li>
+          </ul>
+        </div>
+        {{/if}}
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
+          <button type="button" class="btn btn-primary confirm" id="execute">送信</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

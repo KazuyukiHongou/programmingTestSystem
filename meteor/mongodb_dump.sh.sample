@@ -1,0 +1,2 @@
+cd /var/laboratory/programmingTestSystem/meteor/
+mongodump -h 127.0.0.1 --port 55001 -d meteor --forceTableScan --out ../dump/`date "+%Y%m%d_%H%M%S"`

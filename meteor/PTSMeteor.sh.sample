@@ -1,0 +1,8 @@
+#!/bin/bash
+# 実行するユーザーに応じて変更して下さい
+# export HOME="/home/vagrant"
+export HOME="/root"
+
+cd /var/laboratory/programmingTestSystem/meteor/
+# サービスに登録する場合はフォアグランド起動になるよう、末尾の&は付けないで下さい
+meteor --port=55000 --allow-superuser >> meteor.log

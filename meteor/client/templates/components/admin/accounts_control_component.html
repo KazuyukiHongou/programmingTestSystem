@@ -1,0 +1,77 @@
+<template name="accountsControlComponent">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h4>{{mode}}</h4>
+    </div>
+    <div id="proc-count" style="color:blue;"></div>
+    <div id="message" style="color:blue;"></div>
+    <div class="panel-body">
+      <form class="form-horizontal">
+        <div class="form-group well">
+          <label class="control-label col-md-2" for="username">名前</label>
+          <div class="controls col-md-4">
+            <input name="username" id="username" type="text" value="{{username}}" placeholder="" class="form-control" {{disabled}}/>
+          </div>
+          <label class="control-label col-md-2" for="email">メールアドレス</label>
+          <div class="controls col-md-4">
+            <input name="email" id="email" type="text" value="{{email}}" placeholder="" class="form-control" {{disabled}}/>
+          </div>
+          <label class="control-label col-md-2" for="password">パスワード</label>
+          <div class="controls col-md-4">
+            <input name="password" id="password" type="text" value="{{password}}" placeholder="" class="form-control" {{disabled}}/>
+          </div>
+          <label class="control-label col-md-2" for="memo">メモ</label>
+          <div class="controls col-md-4">
+            <input name="memo" id="memo" type="text" value="{{memo}}" placeholder="" class="form-control"/>
+          </div>
+          {{#if isEdit}}
+          <label class="control-label col-md-2" for="reset">再受験を可能にする</label>
+          <div class="controls col-md-1">
+            <input name="reset" id="reset" type="checkbox" value="reset" placeholder="" class="form-control"/>
+          </div>
+          {{/if}}
+        </div>
+        {{#if isEdit}}
+        <div class="col-xs-4 col-md-offset-5">
+          <button type="button" class="btn btn-primary btn-sm update" value="{{email}}">更新</button>
+          <button type="button" class="btn btn-primary btn-sm delete" value="{{email}}">削除</button>
+          <button type="button" class="btn btn-primary btn-sm cancel" value="{{email}}">キャンセル</button>
+        </div>
+        {{else}}
+        <div class="col-xs-4 col-md-offset-6">
+          <button type="button" class="btn btn-primary btn-sm create" value="{{email}}">追加</button>
+        </div>
+        {{/if}}
+      </form>
+    </div>
+  </div>
+  {{> accountsControlConfirmModalTemplate}}
+</template>
+
+<template name="accountsControlConfirmModalTemplate">
+  <div class="modal fade" id="accountsControlConfirmModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header alert-danger">
+          <h4 class="modal-title">確認</h4>
+        </div>
+        <div class="modal-body">
+          <h4>以下受験者を{{mode}}します</h4>
+          <ul>
+            <li><b>名前:</b> {{username}}</li>
+            <li><b>メールアドレス:</b> {{email}}</li>
+            <li><b>パスワード:</b> {{password}}</li>
+            <li><b>メモ:</b> {{memo}}</li>
+            {{#if isReset}}
+            <li><b>再受験可能にする:</b> YES</li>
+            {{/if}}
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" id="execute">Yes</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
